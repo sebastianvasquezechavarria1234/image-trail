@@ -172,18 +172,18 @@ function App() {
             </h2>
             <div className="relative flex flex-col gap-1">
               <div
-                className="absolute left-0 right-0 rounded-xl bg-white/20 transition-all duration-500 ease-out pointer-events-none"
-                style={indicatorStyle}
+                className="absolute left-0 right-0 rounded-xl bg-white/20 transition-all duration-500 pointer-events-none"
+                style={{ ...indicatorStyle, transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
               />
               {VARIANTS.map((v, i) => (
                 <button
                   key={v.id}
                   ref={el => btnRefs.current[i] = el}
                   onClick={() => setVariant(v.id)}
-                  className={`relative w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-colors duration-300 ${
+                  className={`relative w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-300 ${
                     variant === v.id
-                      ? 'border-white/20 text-white'
-                      : 'border-transparent text-gray-400 hover:text-white'
+                      ? 'text-white'
+                      : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center justify-between">
