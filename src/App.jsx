@@ -170,8 +170,8 @@ function App() {
 
             <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-3 transition-opacity duration-500 group-hover:opacity-0">
               <div className="w-12 h-12 rounded-full border border-purple-500/30 bg-purple-950/20 flex items-center justify-center animate-bounce shadow-[0_0_15px_rgba(168,85,247,0.1)]">
-                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                 </svg>
               </div>
               <p className="text-gray-400 text-sm font-light">
