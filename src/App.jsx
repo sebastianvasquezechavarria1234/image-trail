@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ImageTrail from './ImageTrail';
 import './App.css';
 
@@ -84,6 +84,24 @@ const VARIANTS = [
 function App() {
   const [variant, setVariant] = useState(4);
   const [category, setCategory] = useState('local');
+  const btnRefs = useRef([]);
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+
+  useEffect(() => {
+    const idx = VARIANTS.findIndex(v => v.id === variant);
+    const el = btnRefs.current[idx];
+    if (el) {
+      const parent = el.parentElement;
+      if (parent) {
+        const parentRect = parent.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        setIndicatorStyle({
+          top: elRect.top - parentRect.top,
+          height: elRect.height,
+        });
+      }
+    }
+  }, [variant]);
 
   const activeCategory = IMAGE_CATEGORIES[category] || IMAGE_CATEGORIES.picsum;
 
@@ -152,14 +170,19 @@ function App() {
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
               Animaciones
             </h2>
-            <div className="flex flex-col gap-2">
-              {VARIANTS.map((v) => (
+            <div className="relative flex flex-col gap-1">
+              <div
+                className="absolute left-0 right-0 rounded-xl bg-white/20 transition-all duration-500 ease-out pointer-events-none"
+                style={indicatorStyle}
+              />
+              {VARIANTS.map((v, i) => (
                 <button
                   key={v.id}
+                  ref={el => btnRefs.current[i] = el}
                   onClick={() => setVariant(v.id)}
-                  className={`w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-500 ${
+                  className={`relative w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-colors duration-300 ${
                     variant === v.id
-                      ? 'bg-white border-white/80 text-black shadow-md'
+                      ? 'border-white/20 text-white'
                       : 'border-transparent text-gray-400 hover:text-white'
                   }`}
                 >
