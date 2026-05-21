@@ -246,8 +246,10 @@ function App() {
       </div>
 
       {/* Footer info */}
-      <footer className="mt-16 text-center text-xs text-zinc-600">
-        <p>© 2026 Image Trail App. Desarrollado con Vite, React, Tailwind y GSAP.</p>
+      <footer className="fixed bottom-4 left-1/2 -translate-x-1/2 text-xs text-zinc-600 italic underline underline-offset-4">
+        <a href="https://sebas-dev.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-400 transition-colors">
+          Creado por Sebastián Vásquez Echavarría
+        </a>
       </footer>
     </div>
   );
