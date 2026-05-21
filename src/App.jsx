@@ -88,14 +88,14 @@ function App() {
   const activeCategory = IMAGE_CATEGORIES[category] || IMAGE_CATEGORIES.picsum;
 
   return (
-    <div className="min-h-screen w-full grid-bg flex flex-col items-center py-10 px-4 md:px-8 select-none">
+    <div className="min-h-screen w-full grid-bg flex flex-col py-10 select-none">
 
 
       {/* Main Grid */}
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_280px]">
         
         {/* Play Area */}
-        <div className="lg:col-span-3 flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
           <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 p-4 rounded-xl flex items-center justify-between text-xs text-gray-400">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
@@ -115,7 +115,7 @@ function App() {
           </div>
 
           <div 
-            className="relative h-[600px] w-full rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group flex items-center justify-center"
+            className="relative h-[calc(100vh-5rem)] w-full bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group flex items-center justify-center"
           >
             {variant !== 0 && (
               <ImageTrail
@@ -145,7 +145,7 @@ function App() {
         </div>
 
         {/* Sidebar Controls */}
-        <div className="lg:col-span-1 h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 p-6 rounded-2xl">
+        <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l border-zinc-800/60 p-6">
           <div>
             <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
