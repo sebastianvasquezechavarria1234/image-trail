@@ -190,7 +190,7 @@ function App() {
         {/* Sidebar Controls */}
         <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l border-zinc-800/60 p-6">
           <div>
-            <h2 className="text-lg font-light text-white/70 mb-4 flex items-center gap-2">
+            <h2 className="text-xs font-light text-white/70 mb-4 flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
               Animaciones
             </h2>
@@ -222,7 +222,7 @@ function App() {
           <div className="h-px bg-zinc-800/60" />
 
           <div>
-            <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
+            <h3 className="text-xs font-light text-white/70 mb-3">Imágenes</h3>
             <div className="relative grid grid-cols-2 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
               <div
                 className="absolute rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
