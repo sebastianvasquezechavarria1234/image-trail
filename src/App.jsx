@@ -1,0 +1,210 @@
+import { useState } from 'react';
+import ImageTrail from './ImageTrail';
+import './App.css';
+
+const IMAGE_CATEGORIES = {
+  picsum: {
+    name: 'Picsum Mix',
+    images: [
+      'https://picsum.photos/id/287/300/300',
+      'https://picsum.photos/id/1001/300/300',
+      'https://picsum.photos/id/1025/300/300',
+      'https://picsum.photos/id/1026/300/300',
+      'https://picsum.photos/id/1027/300/300',
+      'https://picsum.photos/id/1028/300/300',
+      'https://picsum.photos/id/1029/300/300',
+      'https://picsum.photos/id/1030/300/300',
+      'https://picsum.photos/id/1031/300/300',
+      'https://picsum.photos/id/1033/300/300',
+      'https://picsum.photos/id/1035/300/300',
+      'https://picsum.photos/id/1036/300/300',
+      'https://picsum.photos/id/1037/300/300',
+      'https://picsum.photos/id/1038/300/300',
+      'https://picsum.photos/id/1039/300/300',
+    ]
+  },
+  nature: {
+    name: 'Naturaleza',
+    images: [
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1472214222541-d510753a4707?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=300&h=300&fit=crop',
+    ]
+  },
+  cyberpunk: {
+    name: 'Urbano & Neon',
+    images: [
+      'https://images.unsplash.com/photo-1515621061946-eff1c2a352bd?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1509281373149-e957c6296406?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1522083165195-342750297f05?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&h=300&fit=crop',
+    ]
+  }
+};
+
+const VARIANTS = [
+  { id: 1, name: 'Escala Suave', desc: 'Las imágenes escalan hacia abajo suavemente mientras se desvanecen con el movimiento.' },
+  { id: 2, name: 'Brillo & Contraste', desc: 'Efecto de flash vibrante con gran escala inicial y resplandor al aparecer.' },
+  { id: 3, name: 'Ascenso Explosivo', desc: 'Las imágenes se elevan rápidamente hacia arriba con un ángulo de dispersión aleatorio.' },
+  { id: 4, name: 'Inercia de Velocidad', desc: 'Deformación física basada en la rapidez del ratón con destello cromático.' },
+  { id: 5, name: 'Giro & Desplazamiento', desc: 'Rotación y estiramiento alineados con la dirección física del movimiento del cursor.' },
+  { id: 6, name: 'Desenfoque de Movimiento', desc: 'Simula un desenfoque radial y pérdida de color proporcional a la velocidad.' },
+  { id: 7, name: 'Pila Persistente', desc: 'Mantiene una cola activa de hasta 9 imágenes que envejecen y se desvanecen en orden.' },
+  { id: 8, name: 'Perspectiva 3D', desc: 'Rotación tridimensional interactiva respecto al centro de la pantalla.' }
+];
+
+function App() {
+  const [variant, setVariant] = useState(4);
+  const [category, setCategory] = useState('picsum');
+
+  const activeCategory = IMAGE_CATEGORIES[category] || IMAGE_CATEGORIES.picsum;
+
+  return (
+    <div className="min-h-screen w-full grid-bg flex flex-col items-center py-10 px-4 md:px-8 select-none">
+      {/* Header */}
+      <header className="text-center max-w-3xl mb-10 mt-4">
+        <span className="px-3 py-1 text-xs font-semibold uppercase tracking-widest text-purple-400 bg-purple-950/40 border border-purple-800/40 rounded-full">
+          ReactBits + GSAP
+        </span>
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-4 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400">
+          Image Trail Showcase
+        </h1>
+        <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          Pasa el cursor sobre la zona interactiva para ver cómo las imágenes siguen tu movimiento mediante animaciones fluidas con GSAP.
+        </p>
+      </header>
+
+      {/* Main Grid */}
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-8">
+        
+        {/* Sidebar Controls */}
+        <div className="lg:col-span-1 flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 p-6 rounded-2xl">
+          <div>
+            <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
+              Animaciones
+            </h2>
+            <div className="flex flex-col gap-2">
+              {VARIANTS.map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => setVariant(v.id)}
+                  className={`w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                    variant === v.id
+                      ? 'bg-purple-600/20 border-purple-500 text-purple-200 shadow-[0_0_15px_rgba(168,85,247,0.15)]'
+                      : 'bg-zinc-800/30 border-transparent text-gray-400 hover:bg-zinc-800/60 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span>{v.name}</span>
+                    <span className="text-[10px] text-zinc-500">Var {v.id}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px bg-zinc-800/60" />
+
+          {/* Category Switcher */}
+          <div>
+            <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
+            <div className="grid grid-cols-3 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
+              {Object.keys(IMAGE_CATEGORIES).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setCategory(key)}
+                  className={`px-2 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                    category === key
+                      ? 'bg-zinc-800 text-white shadow-sm'
+                      : 'text-gray-500 hover:text-gray-300'
+                  }`}
+                >
+                  {IMAGE_CATEGORIES[key].name.split(' ')[0]}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Play Area */}
+        <div className="lg:col-span-3 flex flex-col gap-4">
+          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 p-4 rounded-xl flex items-center justify-between text-xs text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
+              <span>—</span>
+              <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
+            </div>
+            <button 
+              onClick={() => {
+                // Trigger reload of component by changing state briefly or force remount
+                const temp = variant;
+                setVariant(0);
+                setTimeout(() => setVariant(temp), 50);
+              }}
+              className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50"
+            >
+              Reiniciar
+            </button>
+          </div>
+
+          <div 
+            className="relative h-[600px] w-full rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group flex items-center justify-center"
+          >
+            {/* Interactive Image Trail */}
+            {variant !== 0 && (
+              <ImageTrail
+                key={`${category}-${variant}`}
+                items={activeCategory.images}
+                variant={variant}
+              />
+            )}
+
+            {/* Instruction Overlay */}
+            <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-3 transition-opacity duration-500 group-hover:opacity-0">
+              <div className="w-12 h-12 rounded-full border border-purple-500/30 bg-purple-950/20 flex items-center justify-center animate-bounce shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                </svg>
+              </div>
+              <p className="text-gray-400 text-sm font-medium tracking-wide">
+                Mueve el ratón o desliza tu dedo en esta área
+              </p>
+              <span className="text-[10px] text-zinc-600 bg-zinc-900/50 px-2 py-1 rounded-full border border-zinc-800/30">
+                Lienzo de trail interactivo
+              </span>
+            </div>
+
+            {/* Glowing borders */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
+          </div>
+        </div>
+
+      </div>
+
+      {/* Footer info */}
+      <footer className="mt-16 text-center text-xs text-zinc-600">
+        <p>© 2026 Image Trail App. Desarrollado con Vite, React, Tailwind y GSAP.</p>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
