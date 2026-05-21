@@ -94,8 +94,58 @@ function App() {
       {/* Main Grid */}
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-8">
         
+        {/* Play Area */}
+        <div className="lg:col-span-3 flex flex-col gap-4">
+          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 p-4 rounded-xl flex items-center justify-between text-xs text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
+              <span>—</span>
+              <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
+            </div>
+            <button 
+              onClick={() => {
+                const temp = variant;
+                setVariant(0);
+                setTimeout(() => setVariant(temp), 50);
+              }}
+              className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50"
+            >
+              Reiniciar
+            </button>
+          </div>
+
+          <div 
+            className="relative h-[600px] w-full rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group flex items-center justify-center"
+          >
+            {variant !== 0 && (
+              <ImageTrail
+                key={`${category}-${variant}`}
+                items={activeCategory.images}
+                variant={variant}
+              />
+            )}
+
+            <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-3 transition-opacity duration-500 group-hover:opacity-0">
+              <div className="w-12 h-12 rounded-full border border-purple-500/30 bg-purple-950/20 flex items-center justify-center animate-bounce shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                </svg>
+              </div>
+              <p className="text-gray-400 text-sm font-medium tracking-wide">
+                Mueve el ratón o desliza tu dedo en esta área
+              </p>
+              <span className="text-[10px] text-zinc-600 bg-zinc-900/50 px-2 py-1 rounded-full border border-zinc-800/30">
+                Lienzo de trail interactivo
+              </span>
+            </div>
+
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
+          </div>
+        </div>
+
         {/* Sidebar Controls */}
-        <div className="lg:col-span-1 flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 p-6 rounded-2xl">
+        <div className="lg:col-span-1 h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 p-6 rounded-2xl">
           <div>
             <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
@@ -123,7 +173,6 @@ function App() {
 
           <div className="h-px bg-zinc-800/60" />
 
-          {/* Category Switcher */}
           <div>
             <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
             <div className="grid grid-cols-4 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
@@ -141,60 +190,6 @@ function App() {
                 </button>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Play Area */}
-        <div className="lg:col-span-3 flex flex-col gap-4">
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 p-4 rounded-xl flex items-center justify-between text-xs text-gray-400">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
-              <span>—</span>
-              <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
-            </div>
-            <button 
-              onClick={() => {
-                // Trigger reload of component by changing state briefly or force remount
-                const temp = variant;
-                setVariant(0);
-                setTimeout(() => setVariant(temp), 50);
-              }}
-              className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50"
-            >
-              Reiniciar
-            </button>
-          </div>
-
-          <div 
-            className="relative h-[600px] w-full rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group flex items-center justify-center"
-          >
-            {/* Interactive Image Trail */}
-            {variant !== 0 && (
-              <ImageTrail
-                key={`${category}-${variant}`}
-                items={activeCategory.images}
-                variant={variant}
-              />
-            )}
-
-            {/* Instruction Overlay */}
-            <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-3 transition-opacity duration-500 group-hover:opacity-0">
-              <div className="w-12 h-12 rounded-full border border-purple-500/30 bg-purple-950/20 flex items-center justify-center animate-bounce shadow-[0_0_15px_rgba(168,85,247,0.1)]">
-                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                </svg>
-              </div>
-              <p className="text-gray-400 text-sm font-medium tracking-wide">
-                Mueve el ratón o desliza tu dedo en esta área
-              </p>
-              <span className="text-[10px] text-zinc-600 bg-zinc-900/50 px-2 py-1 rounded-full border border-zinc-800/30">
-                Lienzo de trail interactivo
-              </span>
-            </div>
-
-            {/* Glowing borders */}
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
           </div>
         </div>
 
