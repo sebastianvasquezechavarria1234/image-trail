@@ -148,7 +148,7 @@ function App() {
         {/* Sidebar Controls */}
         <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l border-zinc-800/60 p-6">
           <div>
-            <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-light text-white/70 mb-4 flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
               Animaciones
             </h2>
@@ -157,10 +157,10 @@ function App() {
                 <button
                   key={v.id}
                   onClick={() => setVariant(v.id)}
-                  className={`w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                  className={`w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-500 ${
                     variant === v.id
-                      ? 'bg-purple-600/20 border-purple-500 text-purple-200 shadow-[0_0_15px_rgba(168,85,247,0.15)]'
-                      : 'bg-zinc-800/30 border-transparent text-gray-400 hover:bg-zinc-800/60 hover:text-white'
+                      ? 'bg-white border-white/80 text-black shadow-md'
+                      : 'border-transparent text-gray-400 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center justify-between">
