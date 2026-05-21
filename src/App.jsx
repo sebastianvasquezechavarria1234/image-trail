@@ -36,7 +36,7 @@ const IMAGE_CATEGORIES = {
     ]
   },
   nature: {
-    name: 'Naturaleza',
+    name: 'Nature',
     images: [
       'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&h=300&fit=crop',
       'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300&h=300&fit=crop',
@@ -53,7 +53,7 @@ const IMAGE_CATEGORIES = {
     ]
   },
   cyberpunk: {
-    name: 'Urbano & Neon',
+    name: 'Urban & Neon',
     images: [
       'https://images.unsplash.com/photo-1515621061946-eff1c2a352bd?w=300&h=300&fit=crop',
       'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=300&h=300&fit=crop',
@@ -71,14 +71,14 @@ const IMAGE_CATEGORIES = {
 };
 
 const VARIANTS = [
-  { id: 1, name: 'Escala Suave', desc: 'Las imágenes escalan hacia abajo suavemente mientras se desvanecen con el movimiento.' },
-  { id: 2, name: 'Brillo & Contraste', desc: 'Efecto de flash vibrante con gran escala inicial y resplandor al aparecer.' },
-  { id: 3, name: 'Ascenso Explosivo', desc: 'Las imágenes se elevan rápidamente hacia arriba con un ángulo de dispersión aleatorio.' },
-  { id: 4, name: 'Inercia de Velocidad', desc: 'Deformación física basada en la rapidez del ratón con destello cromático.' },
-  { id: 5, name: 'Giro & Desplazamiento', desc: 'Rotación y estiramiento alineados con la dirección física del movimiento del cursor.' },
-  { id: 6, name: 'Desenfoque de Movimiento', desc: 'Simula un desenfoque radial y pérdida de color proporcional a la velocidad.' },
-  { id: 7, name: 'Pila Persistente', desc: 'Mantiene una cola activa de hasta 9 imágenes que envejecen y se desvanecen en orden.' },
-  { id: 8, name: 'Perspectiva 3D', desc: 'Rotación tridimensional interactiva respecto al centro de la pantalla.' }
+  { id: 1, name: 'Soft Scale', desc: 'Images gently scale down as they fade with motion.' },
+  { id: 2, name: 'Brightness & Contrast', desc: 'Vibrant flash effect with large initial scale and glow on appear.' },
+  { id: 3, name: 'Explosive Rise', desc: 'Images quickly rise upward with a random scatter angle.' },
+  { id: 4, name: 'Speed Inertia', desc: 'Physical deformation based on mouse speed with chromatic flash.' },
+  { id: 5, name: 'Spin & Shift', desc: 'Rotation and stretch aligned with the physical cursor movement direction.' },
+  { id: 6, name: 'Motion Blur', desc: 'Simulates radial blur and color loss proportional to speed.' },
+  { id: 7, name: 'Persistent Stack', desc: 'Maintains an active queue of up to 9 images that age and fade in order.' },
+  { id: 8, name: '3D Perspective', desc: 'Interactive three-dimensional rotation relative to screen center.' }
 ];
 
 function App() {
@@ -152,7 +152,7 @@ function App() {
             {/* Variant info overlay */}
             <div className="absolute top-0 left-0 right-0 z-[200] flex items-center justify-between px-4 py-3 bg-gradient-to-b from-zinc-950/80 to-transparent text-xs text-gray-400 pointer-events-none">
               <div className="flex items-center gap-2 pointer-events-auto">
-                <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
+                <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variant {variant}</span>
                 <span>—</span>
                 <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
               </div>
@@ -164,7 +164,7 @@ function App() {
                 }}
                 className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50 pointer-events-auto"
               >
-                Reiniciar
+                Restart
               </button>
             </div>
 
@@ -175,10 +175,10 @@ function App() {
                 </svg>
               </div>
               <p className="text-gray-400 text-sm font-light">
-                Mueve el ratón o desliza tu dedo en esta área
+                Move your mouse or swipe in this area
               </p>
               <span className="text-[10px] text-zinc-600 bg-zinc-900/50 px-2 py-1 rounded-full border border-zinc-800/30">
-                Lienzo de trail interactivo
+                Interactive trail canvas
               </span>
             </div>
 
@@ -190,7 +190,7 @@ function App() {
         {/* Sidebar Controls */}
         <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l-[1px] border-zinc-800/60 p-6">
           <div>
-            <h2 className="text-xs font-light text-white/70 mb-4">Animaciones</h2>
+            <h2 className="text-xs font-light text-white/70 mb-4">Animations</h2>
             <div className="relative flex flex-col gap-1">
               <div
                 className="absolute rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
@@ -219,7 +219,7 @@ function App() {
           <div className="h-px bg-zinc-800/60" />
 
           <div>
-            <h3 className="text-xs font-light text-white/70 mb-3">Imágenes</h3>
+            <h3 className="text-xs font-light text-white/70 mb-3">Images</h3>
             <div className="relative grid grid-cols-2 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
               <div
                 className="absolute rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
