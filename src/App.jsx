@@ -172,7 +172,7 @@ function App() {
             </h2>
             <div className="relative flex flex-col gap-1">
               <div
-                className="absolute left-0 right-0 rounded-xl bg-white/20 transition-all duration-500 pointer-events-none"
+                className="absolute left-0 right-0 rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
                 style={{ ...indicatorStyle, transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
               />
               {VARIANTS.map((v, i) => (
@@ -180,7 +180,7 @@ function App() {
                   key={v.id}
                   ref={el => btnRefs.current[i] = el}
                   onClick={() => setVariant(v.id)}
-                  className={`relative w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-300 ${
+                  className={`relative w-full text-left px-3 py-2 rounded-lg text-xs font-normal transition-colors duration-300 ${
                     variant === v.id
                       ? 'text-white'
                       : 'text-gray-400 hover:text-white'
@@ -188,7 +188,7 @@ function App() {
                 >
                   <div className="flex items-center justify-between">
                     <span>{v.name}</span>
-                    <span className="text-[10px] text-zinc-500">Var {v.id}</span>
+                    <span className="text-[9px] text-zinc-500">Var {v.id}</span>
                   </div>
                 </button>
               ))}
