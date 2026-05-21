@@ -97,11 +97,35 @@ function App() {
         const elRect = el.getBoundingClientRect();
         setIndicatorStyle({
           top: elRect.top - parentRect.top,
+          left: elRect.left - parentRect.left,
+          width: elRect.width,
           height: elRect.height,
         });
       }
     }
   }, [variant]);
+
+  const catBtnRefs = useRef([]);
+  const [catIndicatorStyle, setCatIndicatorStyle] = useState({});
+  const catKeys = Object.keys(IMAGE_CATEGORIES);
+
+  useEffect(() => {
+    const idx = catKeys.findIndex(k => k === category);
+    const el = catBtnRefs.current[idx];
+    if (el) {
+      const parent = el.parentElement;
+      if (parent) {
+        const parentRect = parent.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        setCatIndicatorStyle({
+          top: elRect.top - parentRect.top,
+          left: elRect.left - parentRect.left,
+          width: elRect.width,
+          height: elRect.height,
+        });
+      }
+    }
+  }, [category]);
 
   const activeCategory = IMAGE_CATEGORIES[category] || IMAGE_CATEGORIES.picsum;
 
@@ -172,7 +196,7 @@ function App() {
             </h2>
             <div className="relative flex flex-col gap-1">
               <div
-                className="absolute left-0 right-0 rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
+                className="absolute rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
                 style={{ ...indicatorStyle, transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
               />
               {VARIANTS.map((v, i) => (
@@ -199,14 +223,19 @@ function App() {
 
           <div>
             <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
-            <div className="grid grid-cols-2 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
-              {Object.keys(IMAGE_CATEGORIES).map((key) => (
+            <div className="relative grid grid-cols-2 gap-1">
+              <div
+                className="absolute rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
+                style={{ ...catIndicatorStyle, transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+              />
+              {catKeys.map((key, i) => (
                 <button
                   key={key}
+                  ref={el => catBtnRefs.current[i] = el}
                   onClick={() => setCategory(key)}
-                  className={`px-2 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                  className={`relative px-2 py-1.5 rounded-lg text-xs font-normal transition-colors duration-300 ${
                     category === key
-                      ? 'bg-zinc-800 text-white shadow-sm'
+                      ? 'text-white'
                       : 'text-gray-500 hover:text-gray-300'
                   }`}
                 >
