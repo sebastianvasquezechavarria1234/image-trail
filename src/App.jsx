@@ -95,25 +95,7 @@ function App() {
       <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_280px]">
         
         {/* Play Area */}
-        <div className="flex flex-col gap-4">
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 p-4 rounded-xl flex items-center justify-between text-xs text-gray-400">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
-              <span>—</span>
-              <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
-            </div>
-            <button 
-              onClick={() => {
-                const temp = variant;
-                setVariant(0);
-                setTimeout(() => setVariant(temp), 50);
-              }}
-              className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50"
-            >
-              Reiniciar
-            </button>
-          </div>
-
+        <div className="flex flex-col">
           <div 
             className="relative h-screen w-full bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group"
           >
@@ -124,6 +106,25 @@ function App() {
                 variant={variant}
               />
             )}
+
+            {/* Variant info overlay */}
+            <div className="absolute top-0 left-0 right-0 z-[200] flex items-center justify-between px-4 py-3 bg-gradient-to-b from-zinc-950/80 to-transparent text-xs text-gray-400 pointer-events-none">
+              <div className="flex items-center gap-2 pointer-events-auto">
+                <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
+                <span>—</span>
+                <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
+              </div>
+              <button 
+                onClick={() => {
+                  const temp = variant;
+                  setVariant(0);
+                  setTimeout(() => setVariant(temp), 50);
+                }}
+                className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50 pointer-events-auto"
+              >
+                Reiniciar
+              </button>
+            </div>
 
             <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-3 transition-opacity duration-500 group-hover:opacity-0">
               <div className="w-12 h-12 rounded-full border border-purple-500/30 bg-purple-950/20 flex items-center justify-center animate-bounce shadow-[0_0_15px_rgba(168,85,247,0.1)]">
