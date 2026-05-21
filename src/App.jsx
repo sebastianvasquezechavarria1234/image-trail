@@ -241,15 +241,14 @@ function App() {
               ))}
             </div>
           </div>
+
+          <div className="mt-auto text-center text-[10px] text-zinc-600 italic underline underline-offset-4">
+            <a href="https://sebas-dev.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-400 transition-colors">
+              Creado por Sebastián Vásquez Echavarría
+            </a>
+          </div>
         </div>
 
-      </div>
-
-      {/* Sidebar Footer */}
-      <div className="mt-auto text-center text-[10px] text-zinc-600 italic underline underline-offset-4">
-        <a href="https://sebas-dev.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-400 transition-colors">
-          Creado por Sebastián Vásquez Echavarría
-        </a>
       </div>
     </div>
   );
