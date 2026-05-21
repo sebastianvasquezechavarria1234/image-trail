@@ -89,18 +89,7 @@ function App() {
 
   return (
     <div className="min-h-screen w-full grid-bg flex flex-col items-center py-10 px-4 md:px-8 select-none">
-      {/* Header */}
-      <header className="text-center max-w-3xl mb-10 mt-4">
-        <span className="px-3 py-1 text-xs font-semibold uppercase tracking-widest text-purple-400 bg-purple-950/40 border border-purple-800/40 rounded-full">
-          ReactBits + GSAP
-        </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-4 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400">
-          Image Trail Showcase
-        </h1>
-        <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-          Pasa el cursor sobre la zona interactiva para ver cómo las imágenes siguen tu movimiento mediante animaciones fluidas con GSAP.
-        </p>
-      </header>
+
 
       {/* Main Grid */}
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-8">
