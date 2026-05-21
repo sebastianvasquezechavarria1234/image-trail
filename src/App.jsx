@@ -88,34 +88,16 @@ function App() {
   const activeCategory = IMAGE_CATEGORIES[category] || IMAGE_CATEGORIES.picsum;
 
   return (
-    <div className="min-h-screen w-full grid-bg flex flex-col py-10 select-none">
+    <div className="min-h-screen w-full grid-bg flex flex-col select-none">
 
 
       {/* Main Grid */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_280px]">
         
         {/* Play Area */}
-        <div className="flex flex-col gap-4">
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 p-4 rounded-xl flex items-center justify-between text-xs text-gray-400">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">Variante {variant}</span>
-              <span>—</span>
-              <span>{VARIANTS.find(v => v.id === variant)?.desc}</span>
-            </div>
-            <button 
-              onClick={() => {
-                const temp = variant;
-                setVariant(0);
-                setTimeout(() => setVariant(temp), 50);
-              }}
-              className="hover:text-purple-400 transition-colors cursor-pointer px-2 py-1 rounded hover:bg-zinc-800/50"
-            >
-              Reiniciar
-            </button>
-          </div>
-
+        <div className="flex flex-col">
           <div 
-            className="relative h-[calc(100vh-5rem)] w-full bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group flex items-center justify-center"
+            className="relative h-screen w-full bg-zinc-950/80 border border-zinc-800/80 shadow-inner overflow-hidden cursor-crosshair group"
           >
             {variant !== 0 && (
               <ImageTrail
@@ -124,6 +106,23 @@ function App() {
                 variant={variant}
               />
             )}
+
+            {/* Variant selector overlay */}
+            <div className="absolute left-4 top-4 z-[200] flex flex-col gap-1.5">
+              {VARIANTS.map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => setVariant(v.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 border ${
+                    variant === v.id
+                      ? 'bg-purple-600/30 border-purple-500 text-purple-200 shadow-[0_0_15px_rgba(168,85,247,0.15)]'
+                      : 'bg-zinc-900/60 border-zinc-700/50 text-gray-400 hover:bg-zinc-800/80 hover:text-white'
+                  }`}
+                >
+                  Var {v.id}
+                </button>
+              ))}
+            </div>
 
             <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center gap-3 transition-opacity duration-500 group-hover:opacity-0">
               <div className="w-12 h-12 rounded-full border border-purple-500/30 bg-purple-950/20 flex items-center justify-center animate-bounce shadow-[0_0_15px_rgba(168,85,247,0.1)]">
@@ -145,37 +144,10 @@ function App() {
         </div>
 
         {/* Sidebar Controls */}
-        <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l border-zinc-800/60 p-6">
-          <div>
-            <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
-              Animaciones
-            </h2>
-            <div className="flex flex-col gap-2">
-              {VARIANTS.map((v) => (
-                <button
-                  key={v.id}
-                  onClick={() => setVariant(v.id)}
-                  className={`w-full text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-300 ${
-                    variant === v.id
-                      ? 'bg-purple-600/20 border-purple-500 text-purple-200 shadow-[0_0_15px_rgba(168,85,247,0.15)]'
-                      : 'bg-zinc-800/30 border-transparent text-gray-400 hover:bg-zinc-800/60 hover:text-white'
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span>{v.name}</span>
-                    <span className="text-[10px] text-zinc-500">Var {v.id}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="h-px bg-zinc-800/60" />
-
+        <div className="h-full flex flex-col bg-zinc-900/60 backdrop-blur-xl border-l border-zinc-800/60 p-6">
           <div>
             <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
-            <div className="grid grid-cols-4 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
+            <div className="grid grid-cols-2 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
               {Object.keys(IMAGE_CATEGORIES).map((key) => (
                 <button
                   key={key}
