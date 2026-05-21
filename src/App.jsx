@@ -3,6 +3,18 @@ import ImageTrail from './ImageTrail';
 import './App.css';
 
 const IMAGE_CATEGORIES = {
+  local: {
+    name: 'Local',
+    images: [
+      '/048155170c820a3dad81ae1e5b043538.jpg',
+      '/16d276dae2b866be1c8faed7ccc1bb15.jpg',
+      '/47c98aecdfdaa0e4c8a585642981b357.jpg',
+      '/8496ace83d5a13daeb68a6516c58dd99.jpg',
+      '/c09384d9ab2dade46db96408a33caba9.jpg',
+      '/ce7d991bd59fe943385fbea80dd7b222.jpg',
+      '/d5b90ec3e614ccd60a5479919c95dd4e.jpg',
+    ]
+  },
   picsum: {
     name: 'Picsum Mix',
     images: [
@@ -71,7 +83,7 @@ const VARIANTS = [
 
 function App() {
   const [variant, setVariant] = useState(4);
-  const [category, setCategory] = useState('picsum');
+  const [category, setCategory] = useState('local');
 
   const activeCategory = IMAGE_CATEGORIES[category] || IMAGE_CATEGORIES.picsum;
 
@@ -125,7 +137,7 @@ function App() {
           {/* Category Switcher */}
           <div>
             <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
-            <div className="grid grid-cols-3 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
+            <div className="grid grid-cols-4 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
               {Object.keys(IMAGE_CATEGORIES).map((key) => (
                 <button
                   key={key}
