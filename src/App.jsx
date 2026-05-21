@@ -188,7 +188,7 @@ function App() {
         </div>
 
         {/* Sidebar Controls */}
-        <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l border-zinc-800/60 p-6">
+        <div className="h-full flex flex-col gap-6 bg-zinc-900/60 backdrop-blur-xl border-l-[1px] border-zinc-800/60 p-6">
           <div>
             <h2 className="text-xs font-light text-white/70 mb-4">Animaciones</h2>
             <div className="relative flex flex-col gap-1">
