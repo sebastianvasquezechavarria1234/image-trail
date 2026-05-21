@@ -223,7 +223,7 @@ function App() {
 
           <div>
             <h3 className="text-sm font-bold text-zinc-300 mb-3">Imágenes</h3>
-            <div className="relative grid grid-cols-2 gap-1">
+            <div className="relative grid grid-cols-2 gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/50">
               <div
                 className="absolute rounded-lg bg-white/10 transition-all duration-500 pointer-events-none"
                 style={{ ...catIndicatorStyle, transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
